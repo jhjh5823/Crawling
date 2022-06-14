@@ -19,11 +19,12 @@ def scrape_weather():
     curr_temp = soup.find("div", attrs={"class":"temperature_text"}).get_text()
     min_temp = soup.find("span", attrs={"class":"lowest"}).get_text() # 체감 온도
     max_temp = soup.find("span", attrs={"class":"highest"}).get_text() # 
+    
     # 오전 강수확룔 OO%° / 오후 강수확률 OO%°
     morning_rain_rate = soup.find("span", attrs={"class":"weather_left"}).get_text().strip()
     afternoon_rain_rate = soup.find_all("span", attrs={"class":"weather_left"})[2].get_text().strip()
 
-    # 미세먼지 OO°/m2
+    # 미세먼지
     dust = soup.find("ul", attrs={"class":"today_chart_list"})
     pm10 = dust.find_all("li")[0].get_text().strip() #미세먼지
     pm25 = dust.find_all("li")[1].get_text().strip()
@@ -34,6 +35,7 @@ def scrape_weather():
     print()
     print(pm10)
     print(pm25)
+    print()
 
 def scrape_headline_news():
     print("헤드라인 뉴스")
@@ -61,6 +63,7 @@ def scrape_english():
     print("(한글 지문)")
     for sentence in sentences[:len(sentences)//2:]: # 8문장이 있다고 가정할 때, 5~8까지 잘라서 가져옴, index 기준 0~3 까지 잘라서
         print(sentence.get_text().strip())
+        
 
 
 
